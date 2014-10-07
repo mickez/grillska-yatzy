@@ -20,7 +20,7 @@
             // Random float 0<=rnd<1
             var rnd = Math.Random();
             // Range it to 0<=rnd<6
-            rnd =* 6;
+            rnd *= 6;
             // Floot it and convert to int. Range 0-5
             rnd = Math.floor(rnd) + 1;
         }

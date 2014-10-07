@@ -10,6 +10,8 @@
     }
 
     var game = function(nPlayers, names) {
+        console.log('Initializing yatzy game');
+
 
         this.nPlayers = nPlayers;
 
@@ -19,12 +21,10 @@
 
         this.state;
 
-
-
         function init() {
             // Init players
             for (var i = 0; i < nPlayers; i++) {
-                this.players.push(new window.grillskaYatzy.player((names || [])[0]));
+                this.players.push(new window.grillskaYatzy.player(names[i] || 'Player ' + (i + 1)));
             }
 
             // Init dice
@@ -35,9 +35,6 @@
         }
     }
 
-    game.prototype.
-
-
-    window.grillskaYatzy.game = game;
+    window.grillskaYatzy.game = new game();
 
 })();
