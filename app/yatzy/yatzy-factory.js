@@ -4,10 +4,12 @@
     var game;
 
     angular.module('yatzy')
-        .factory(function() {            
+        .factory('yatzy', function($window) {
             if (typeof game === 'undefined') {
-                return new window.grillskaYatzy.game();
+                game = new $window.grillskaYatzy.game();
             }
+
+            return game;
         });
 
 })();
