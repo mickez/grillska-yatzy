@@ -9,34 +9,35 @@
         'GAME_END': 4
     }
 
-    var game = function(nPlayers, names) {
+    var game = function() {
         console.log('Initializing yatzy game');
 
-        this.nPlayers = nPlayers;
+        var nPlayers = this.nPlayers = nPlayers;
 
-        this.players = [];
-        this.turn;
-        this.dices;
+        var players = this.players = [];
+        var turn = this.turn = undefined;
+        var dices = this.dices = undefined;
 
-        this.state;
-
-        function init() {
-            // Init players
-            for (var i = 0; i < nPlayers; i++) {
-                this.players.push(new window.grillskaYatzy.player(names[i] || 'Player ' + (i + 1)));
-            }
-
-            // Init dice
-            this.dices = new window.grillskaYatzy.dices();
-
-            // Init turn
-            this.turn = 0;
-        }
-
-        init();
+        var state = this.state = undefined;
     }
 
-    game.setNames = function(names, index) {
+    game.prototype.init = function(names, nPlayers) {
+        this.nPlayers = nPlayers;
+
+        // Init players
+        for (var i = 0; i < this.nPlayers; i++) {
+            this.players.push(new window.grillskaYatzy.player(names[i] || 'Player ' + (i + 1)));
+        }
+
+        // Init dice
+        this.dices = new window.grillskaYatzy.dices();
+
+        // Init turn
+        this.turn = 0;
+
+    }
+
+    game.prototype.setNames = function(names, index) {
         if (index) {
             this.players[index].name = names;
         } else {

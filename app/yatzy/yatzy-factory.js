@@ -10,6 +10,9 @@
             }
 
             return game;
+        })
+        .factory('yatzyPlayer', function($window) {
+            return $window.grillskaYatzy.player;
         });
 
 })();

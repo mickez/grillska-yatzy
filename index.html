@@ -21,12 +21,21 @@
 <script src="app/app.js"></script>
 
 
+<script src="app/newGame/newGame-directive.js"></script>
+<script src="app/yatzy/yatzy-factory.js"></script>
+
+
 <!-- STYLES -->
+<link rel="stylesheet" href="bower_components/uikit/dist/css/uikit.min.css">
+<link rel="stylesheet" href="bower_components/uikit/dist/css/addons/uikit.addons.min.css">
 <link rel="stylesheet" href="css/main.css">
 
 <body ng-controller="main">
     <div class="container">
         <h1 id="title">{{meta.title}}</h1>
+
+        <new-game></new-game>
+
     </div>
 </body>
 </html>
