@@ -12,7 +12,6 @@
     var game = function(nPlayers, names) {
         console.log('Initializing yatzy game');
 
-
         this.nPlayers = nPlayers;
 
         this.players = [];
@@ -33,8 +32,20 @@
             // Init turn
             this.turn = 0;
         }
+
+        init();
     }
 
-    window.grillskaYatzy.game = new game();
+    game.setNames = function(names, index) {
+        if (index) {
+            this.players[index].name = names;
+        } else {
+            for (var i = 0; i < this.nPlayers; i++) {
+                this.players[i].name = names[i];
+            }
+        }
+    }
+
+    window.grillskaYatzy.game = game;
 
 })();
