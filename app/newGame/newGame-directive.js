@@ -12,16 +12,31 @@
                 templateUrl: '/app/newGame/newGame.html',
                 controller: function($scope, yatzyPlayer) {
                     var players = $scope.players = [];
+                    var nPlayers = $scope.nPlayers = {value: 1};
+                    var maxPlayers = $scope.maxPlayers = 10;
+
 
                     var addPlayer = $scope.addPlayer = function() {
-                        players.push(new yatzyPlayer('Player ' + (players.length + 1)));
-                    }
+                        players.push(new yatzyPlayer('Spelare ' + (players.length + 1)));
+                    };
+                    
+                    var playerUpdate = $scope.playerUpdate = function() {
+                        var index, howMany;
+                        if (nPlayers.value > players.length) {
+                            howMany = nPlayers.value - players.length;
 
-                    var allowMore = $scope.allowMore = function() {
-                        return players.length < 6;
-                    }
+                            for (var i = 0; i < howMany; i++) {
+                                addPlayer();
+                            }
 
-                    addPlayer();
+                        } else {
+                            index = nPlayers.value;
+                            howMany = players.length - index;
+                            players.splice(index, howMany);
+                        }
+                    };
+
+                    playerUpdate();
 
                 },
                 link: function(scope, elem, attr) {
