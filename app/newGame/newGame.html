@@ -1,22 +1,32 @@
 <div class="panel-new-game">
     <div class="uk-push-1-3 uk-width-1-3">
-<!--         <button 
-            class="uk-button uk-button-primary" 
-            ng-click="addPlayer()" 
-            ng-show="allowMore()" 
-            ng-disabled="!allowMore()">
-            <i class="uk-icon-plus"></i> Add New Player
-        </button> -->
 
-        <form class="uk-form uk-form uk-width-1-1">
-            <input type="text" placeholder="Hur många spelare?" class="uk-width-1-1" ng-change="playerUpdate()" ng-model="nPlayers.value">
+        <form class="uk-form uk-width-1-1" name="nPlayersForm">
+            <label for="nPlayers">Antal spelare</label>
+            <input 
+                type="number" 
+                name="nPlayers"
+                min="1"
+                max="6"
+                required
+                placeholder="Hur många spelare?" 
+                ng-change="playerUpdate()" 
+                ng-model="nPlayers.value" 
+                select-on-focus 
+                class="uk-width-1-1">
         </form>
 
-        <div ng-repeat="player in players" class="badge-player fx-zoom-up fx-easing-quint">
+
+        <div ng-repeat="player in players" class="badge-player fx-zoom-up fx-easing-quint uk-width-1-1">
             <form class="badge-header uk-form">
                 <h3 class="uk-text-bottom uk-margin-bottom-remove">Namn</h3>
-                <input type="text" ng-model="player.name" class="uk-width-1-1">
+                <input type="text" ng-model="player.name" class="uk-width-1-1" select-on-focus>
             </form>
         </div>
+
+        <div class="uk-button uk-width-1-1 fx-fade-normal" ng-if="nPlayersForm.nPlayers.$valid">
+            Spela!
+        </div>
+
     </div>
 </div>

@@ -12,15 +12,18 @@
                 templateUrl: '/app/newGame/newGame.html',
                 controller: function($scope, yatzyPlayer) {
                     var players = $scope.players = [];
-                    var nPlayers = $scope.nPlayers = {value: 1};
+                    var nPlayers = $scope.nPlayers = {
+                        value: NaN
+                    };
                     var maxPlayers = $scope.maxPlayers = 10;
 
 
                     var addPlayer = $scope.addPlayer = function() {
                         players.push(new yatzyPlayer('Spelare ' + (players.length + 1)));
                     };
-                    
+
                     var playerUpdate = $scope.playerUpdate = function() {
+                        console.log('hey');
                         var index, howMany;
                         if (nPlayers.value > players.length) {
                             howMany = nPlayers.value - players.length;
@@ -29,6 +32,8 @@
                                 addPlayer();
                             }
 
+                        } else if (isNaN(nPlayers.value)) {
+                            players.splice(0, 1000);
                         } else {
                             index = nPlayers.value;
                             howMany = players.length - index;
