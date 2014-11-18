@@ -66,22 +66,23 @@
                         </tr>
                         <tr ng-repeat="player in yatzy.players">
                             <th>{{ player.name }}</th>
-                            <td>{{ player.ones || '-' }}</td>
-                            <td>{{ player.twos || '-' }}</td>
-                            <td>{{ player.threes || '-' }}</td>
-                            <td>{{ player.fours || '-' }}</td>
-                            <td>{{ player.fives || '-' }}</td>
-                            <td>{{ player.sixes || '-' }}</td>
 
-                            <td>{{ player.pair || '-' }}</td>
-                            <td>{{ player.twoPair || '-' }}</td>
-                            <td>{{ player.triplet || '-' }}</td>
-                            <td>{{ player.quadruplet || '-' }}</td>
-                            <td>{{ player.ladderSmall || '-' }}</td>
-                            <td>{{ player.ladderLarge || '-' }}</td>
-                            <td>{{ player.fullHouse || '-' }}</td>
-                            <td>{{ player.chance || '-' }}</td>
-                            <td>{{ player.yatzy || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setOnes')">{{ player.ones || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setTwos')">{{ player.twos || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setThrees')">{{ player.threes || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setFours')">{{ player.fours || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setFives')">{{ player.fives || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setSixes')">{{ player.sixes || '-' }}</td>
+
+                            <td ng-click="callHelper($index, 'setPair')">{{ player.pair || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setTwoPair')">{{ player.twoPair || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setTriplet')">{{ player.triplet || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setQuadruplet')">{{ player.quadruplet || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setLadderSmall')">{{ player.ladderSmall || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setLadderLarge')">{{ player.ladderLarge || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setfullHouse')">{{ player.fullHouse || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setChance')">{{ player.chance || '-' }}</td>
+                            <td ng-click="callHelper($index, 'setYatzy')">{{ player.yatzy || '-' }}</td>
                         </tr>
                     </table>
                 </div>

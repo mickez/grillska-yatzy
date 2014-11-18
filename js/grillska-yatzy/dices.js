@@ -34,7 +34,7 @@
         }
 
         for (var i = 0; i < this.nDices; i++) {
-            if (!this.dices[i].locked) {
+            if (!this.dices[i].locked || this.dices[i].value === -1) {
                 this.dices[i].value = rndInteger();
             }
         }

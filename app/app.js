@@ -23,6 +23,11 @@ angular.module('yatzy', ['ngAnimate', 'yatzy.newGame', 'ngFx', 'yatzy.utils'])
             }
         };
 
+        $scope.callHelper = function(index, func) {
+            var dices = yatzy.dices.dices;
+            $scope.yatzy.players[index][func](dices[0].value, dices[1].value, dices[2].value, dices[3].value, dices[4].value, dices[5].value);
+        };
+
     });
 
 angular.module('yatzy.utils', []);
