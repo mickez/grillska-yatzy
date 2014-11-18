@@ -39,7 +39,7 @@
     };
 
     dices.prototype.allowRoll = function() {
-        return !(this.rolls >= 3);
+        return this.rolls < 3;
     }
 
     dices.prototype.reset = function() {
