@@ -23,7 +23,6 @@
                     };
 
                     var playerUpdate = $scope.playerUpdate = function() {
-                        console.log('hey');
                         var index, howMany;
                         if (nPlayers.value > players.length) {
                             howMany = nPlayers.value - players.length;
@@ -43,11 +42,15 @@
 
                     playerUpdate();
 
+                    var play = $scope.play = function() {
+                        $scope.callback(players);
+                    };
+
                 },
                 link: function(scope, elem, attr) {
                     console.log('newGame directive initializing');
                 }
-            }
+            };
         });
 
 })();

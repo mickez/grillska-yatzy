@@ -7,3 +7,12 @@
     display: block;
     text-align: center;
 }
+
+.score-board {
+    background-color: #fff;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+}

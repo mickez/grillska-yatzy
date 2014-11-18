@@ -1,14 +1,6 @@
 (function() {
     'use strict';
 
-    var states = {
-        'ROLL_FIRST': 0,
-        'ROLL_PICK': 1,
-        'PICK': 2,
-        'NEXT_PLAYER': 3,
-        'GAME_END': 4
-    }
-
     var game = function() {
         console.log('Initializing yatzy game');
 
@@ -18,8 +10,17 @@
         var turn = this.turn = undefined;
         var dices = this.dices = undefined;
 
-        var state = this.state = undefined;
-    }
+        var state = this.state = this.states['NEW_GAME'];
+    };
+
+    game.prototype.states = {
+        'NEW_GAME': 0,
+        'ROLL_FIRST': 1,
+        'ROLL_PICK': 2,
+        'PICK': 3,
+        'NEXT_PLAYER': 4,
+        'GAME_END': 5
+    };
 
     game.prototype.init = function(names, nPlayers) {
         this.nPlayers = nPlayers;
@@ -35,7 +36,9 @@
         // Init turn
         this.turn = 0;
 
-    }
+        this.state = this.states['ROLL_FIRST'];
+
+    };
 
     game.prototype.setNames = function(names, index) {
         if (index) {
@@ -45,7 +48,7 @@
                 this.players[i].name = names[i];
             }
         }
-    }
+    };
 
     window.grillskaYatzy.game = game;
 

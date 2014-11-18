@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="yatzy">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -35,8 +36,63 @@
     <div class="container">
         <h1 id="title">{{meta.title}}</h1>
 
-        <new-game></new-game>
+        <div ng-switch="getCurrentScreen()">
+            <div ng-switch-when="newGame">
+                <new-game callback="newGameCallback"></new-game>
+            </div>
+
+            <div ng-switch-when="game" class="uk-grid uk-grid-preserve">
+                <div class="uk-width-1-1 score-board">
+                    <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">
+                        <tr>
+                            <td>Spelare</td>
+
+                            <th>Ettor</th>
+                            <th>Tvåor</th>
+                            <th>Treor</th>
+                            <th>Fyror</th>
+                            <th>Femmor</th>
+                            <th>Sexor</th>
+
+                            <th>Par</th>
+                            <th>Tvåpar</th>
+                            <th>Tretal</th>
+                            <th>Fyrtal</th>
+                            <th>Liten stege</th>
+                            <th>Stor stege</th>
+                            <th>Kåk</th>
+                            <th>Chans</th>
+                            <th>Yatzy!</th>
+                        </tr>
+                        <tr ng-repeat="player in yatzy.players">
+                            <th>{{ player.name }}</th>
+                            <td>{{ player.ones || '-' }}</td>
+                            <td>{{ player.twos || '-' }}</td>
+                            <td>{{ player.threes || '-' }}</td>
+                            <td>{{ player.fours || '-' }}</td>
+                            <td>{{ player.fives || '-' }}</td>
+                            <td>{{ player.sixes || '-' }}</td>
+
+                            <td>{{ player.pair || '-' }}</td>
+                            <td>{{ player.twoPair || '-' }}</td>
+                            <td>{{ player.triplet || '-' }}</td>
+                            <td>{{ player.quadruplet || '-' }}</td>
+                            <td>{{ player.ladderSmall || '-' }}</td>
+                            <td>{{ player.ladderLarge || '-' }}</td>
+                            <td>{{ player.fullHouse || '-' }}</td>
+                            <td>{{ player.chance || '-' }}</td>
+                            <td>{{ player.yatzy || '-' }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+            </div>
+
+        </div>
 
     </div>
 </body>
+
 </html>
