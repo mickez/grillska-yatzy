@@ -34,14 +34,14 @@
 
 <body ng-controller="main">
     <div class="container">
-        <h1 id="title">{{meta.title}}</h1>
+        <!-- <h1 id="title">{{meta.title}}</h1> -->
 
         <div ng-switch="getCurrentScreen()">
             <div ng-switch-when="newGame">
                 <new-game callback="newGameCallback"></new-game>
             </div>
 
-            <div ng-switch-when="game" class="uk-grid uk-grid-preserve">
+            <div ng-switch-when="game" class="uk-grid uk-grid-preserve game-view uk-width-1-1">
                 <div class="uk-width-1-1 score-board">
                     <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">
                         <tr>
@@ -86,7 +86,10 @@
                     </table>
                 </div>
 
-
+                <div class="container uk-grid uk-grid-preserve">
+                    <div ng-include="'partials/dice.html'" class="uk-width-1-2"></div>
+                    <div ng-include="'partials/controls.html'" class="uk-width-1-2"></div>
+                </div>
 
             </div>
 
