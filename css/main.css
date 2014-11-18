@@ -8,11 +8,17 @@
     text-align: center;
 }
 
+.game-view {
+    position: relative;
+    left: -14%;
+    width: 133%;
+}
+
 .score-board {
     background-color: #fff;
 
-    position: absolute;
     left: 0;
     top: 0;
     padding: 0;
+    padding-left: 0;
 }

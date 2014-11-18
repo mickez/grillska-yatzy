@@ -13,6 +13,8 @@ angular.module('yatzy', ['ngAnimate', 'yatzy.newGame', 'ngFx', 'yatzy.utils'])
             yatzy.init(names, names.length);
         };
 
+        $scope.newGameCallback(['micke', 'johan']);
+
         $scope.getCurrentScreen = function() {
             if (yatzy.state === yatzy.states['NEW_GAME']) {
                 return 'newGame';
