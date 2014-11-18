@@ -9,7 +9,7 @@
         this.d5 = -1;
 
         this.rolls = 0;
-    }
+    };
 
     dices.prototype.roll = function() {
         if (this.rolls === 3) {
@@ -40,7 +40,7 @@
 
     dices.prototype.allowRoll = function() {
         return this.rolls < 3;
-    }
+    };
 
     dices.prototype.reset = function() {
         this.rolls = 0;
@@ -49,7 +49,7 @@
         this.d3 = -1;
         this.d4 = -1;
         this.d5 = -1;
-    }
+    };
 
     window.grillskaYatzy.dices = dices;
 
