@@ -18,11 +18,13 @@
 
         function rndInteger() {
             // Random float 0<=rnd<1
-            var rnd = Math.Random();
+            var rnd = Math.random();
             // Range it to 0<=rnd<6
             rnd *= 6;
             // Floot it and convert to int. Range 0-5
             rnd = Math.floor(rnd) + 1;
+
+            return rnd;
         }
 
         this.d1 = rndInteger();
