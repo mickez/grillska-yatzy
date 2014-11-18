@@ -2,13 +2,19 @@
     'use strict';
 
     var dices = function() {
-        this.d1 = -1;
-        this.d2 = -1;
-        this.d3 = -1;
-        this.d4 = -1;
-        this.d5 = -1;
-
+        this.nDices = 6;
         this.rolls = 0;
+
+        this.dices = [];
+
+        for (var i = 0; i < this.nDices; i++) {
+            this.dices.push({
+                value: -1,
+                locked: false
+            });
+        }
+
+        this.reset();
     };
 
     dices.prototype.roll = function() {
@@ -27,11 +33,11 @@
             return rnd;
         }
 
-        this.d1 = rndInteger();
-        this.d2 = rndInteger();
-        this.d3 = rndInteger();
-        this.d4 = rndInteger();
-        this.d5 = rndInteger();
+        for (var i = 0; i < this.nDices; i++) {
+            if (!this.dices[i].locked) {
+                this.dices[i].value = rndInteger();
+            }
+        }
 
         this.rolls += 1;
 
@@ -44,11 +50,10 @@
 
     dices.prototype.reset = function() {
         this.rolls = 0;
-        this.d1 = -1;
-        this.d2 = -1;
-        this.d3 = -1;
-        this.d4 = -1;
-        this.d5 = -1;
+        for (var i = 0; i < this.nDices; i++) {
+            this.dices[i].value = -1;
+            this.dices[i].locked = false;
+        }
     };
 
     window.grillskaYatzy.dices = dices;
