@@ -51,7 +51,7 @@
     };
 
     game.prototype.setDice = function(player, func, field) {
-        if (player !== this.turn || this.dices.rolls === 0 || this.players[player][field] || this.state !== this.states['ROLL_PICK']) {
+        if (player !== this.turn || this.dices.rolls === 0 || this.players[player][field] || (this.state !== this.states['ROLL_PICK'] && this.state !== this.states['PICK'])) {
             return;
         }
 

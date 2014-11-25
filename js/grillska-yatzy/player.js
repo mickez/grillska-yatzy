@@ -205,38 +205,19 @@
     };
 
     player.prototype.setLadderSmall = function(d1, d2, d3, d4, d5) {
-        var tallies;
-        tallies = [0, 0, 0, 0, 0, 0, 0];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
-        if (tallies[0] == 1 &&
-            tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1) {
+        if (_.xor([d1,d2,d3,d4,d5], [1,2,3,4,5]).length === 0) {
 
             this.ladderSmall = 15;
+            return;
         }
         this.ladderSmall = 0;
     };
 
     player.prototype.setLadderLarge = function(d1, d2, d3, d4, d5) {
-        var tallies;
-        tallies = [0, 0, 0, 0, 0, 0, 0, 0];
-        tallies[d1 - 1] += 1;
-        tallies[d2 - 1] += 1;
-        tallies[d3 - 1] += 1;
-        tallies[d4 - 1] += 1;
-        tallies[d5 - 1] += 1;
-        if (tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1 && tallies[5] == 1) {
+        if (_.xor([d1,d2,d3,d4,d5], [2,3,4,5,6]).length === 0) {
             
             this.ladderLarge = 20;
+            return;
         }
         this.ladderLarge = 0;
     };
