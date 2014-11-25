@@ -2,7 +2,7 @@
     'use strict';
 
     var dices = function() {
-        this.nDices = 6;
+        this.nDices = 5;
         this.rolls = 0;
 
         this.dices = [];
@@ -42,6 +42,10 @@
         this.rolls += 1;
 
         return true;
+    };
+
+    dices.prototype.remainingRolls = function() {
+        return 3 - this.rolls;
     };
 
     dices.prototype.allowRoll = function() {

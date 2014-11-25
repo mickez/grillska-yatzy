@@ -53,7 +53,7 @@
         total += d3;
         total += d4;
         total += d5;
-        return total;
+        this.chance = total;
     };
 
     player.prototype.setYatzy = function(d1, d2, d3, d4, d5) {

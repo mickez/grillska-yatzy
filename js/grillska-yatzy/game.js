@@ -1,6 +1,10 @@
 (function() {
     'use strict';
 
+    function camelCase(str) {
+        return str.charAt(0).toLowerCase() + str.substring(1);
+    }
+
     var game = function() {
         console.log('Initializing yatzy game');
 
@@ -38,6 +42,36 @@
 
         this.state = this.states['ROLL_FIRST'];
 
+    };
+
+    game.prototype.nextPlayer = function() {
+        this.turn = (this.turn + 1) % this.nPlayers;
+        this.dices.reset();
+        this.state = this.states['ROLL_FIRST'];
+    };
+
+    game.prototype.setDice = function(player, func, field) {
+        if (player !== this.turn || this.dices.rolls === 0 || this.players[player][field] || this.state !== this.states['ROLL_PICK']) {
+            return;
+        }
+
+        var dices = this.dices.dices;
+        this.players[player][func](dices[0].value, dices[1].value, dices[2].value, dices[3].value, dices[4].value);
+
+        this.state = this.states['NEXT_PLAYER'];
+
+    };
+
+    game.prototype.roll = function() {
+        this.dices.roll();
+
+        if (this.state === this.states['ROLL_FIRST']) {
+            this.state = this.states['ROLL_PICK'];
+        }
+
+        if (this.state === this.states['ROLL_PICK'] && this.dices.rolls === 3) {
+            this.state = this.states['PICK'];
+        }
     };
 
     game.prototype.setNames = function(names, index) {

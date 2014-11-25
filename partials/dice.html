@@ -1,5 +1,13 @@
 <div>
-    <ul>
+    <h3 ng-if="yatzy.dices.remainingRolls() !== 0 && yatzy.dices.remainingRolls() !== 3" class="fx-zoom-normal">
+        Marka de tärningarna du vill behålla
+    </h3>
+    <div ng-if="yatzy.dices.remainingRolls() === 3">
+        <h3>Kasta tärningarna!</h3>
+    </div>
+    <ul ng-if="yatzy.dices.remainingRolls() !== 3">
         <li ng-repeat="dice in yatzy.dices.dices">{{ dice.value }}<input type="checkbox" ng-model="dice.locked" ng-disabled="dice.value === -1"></li>
     </ul>
+
+
 </div>

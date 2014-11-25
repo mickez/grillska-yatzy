@@ -1,3 +1,7 @@
 <div>
-    <button class="uk-button" ng-click="yatzy.dices.roll()" ng-disabled="!yatzy.dices.allowRoll()">Roll</button>
+    <button 
+        class="uk-button" 
+        ng-click="yatzy.roll()" 
+        ng-disabled="!yatzy.dices.allowRoll()" 
+        ng-show="yatzy.dices.allowRoll()">Kasta tärningarna!</button>
 </div>
