@@ -49,6 +49,18 @@ angular.module('yatzy', ['ngAnimate', 'yatzy.newGame', 'ngFx', 'yatzy.utils'])
             }
         };
 
+        $scope.canPick = function() {
+            return yatzy.state === yatzy.states['ROLL_PICK'] || yatzy.state === yatzy.states['PICK'];
+        };
+
+        $scope.canRoll = function() {
+            return yatzy.state === yatzy.states['ROLL_PICK'] || yatzy.state === yatzy.states['ROLL_FIRST'];
+        };
+
+        $scope.isControlsVisible = function() {
+            return $scope.canRoll();
+        };
+
     });
 
 angular.module('yatzy.utils', []);

@@ -153,7 +153,14 @@
                     <div class="uk-width-1-2">
                         <h2>{{ getCurrentPlayer().name }}s tur</h2>
                         <h3>{{ getInstruction() }}</h3>
-                        <div ng-include="'partials/controls.html'"></div>
+
+                        <div ng-if="isControlsVisible()">
+                            <button 
+                                class="uk-button" 
+                                ng-click="yatzy.roll()" 
+                                ng-disabled="!yatzy.dices.allowRoll()" 
+                                ng-show="yatzy.dices.allowRoll()">Kasta tärningarna!</button>
+                        </div>
 
                         <span ng-switch="yatzy.dices.remainingRolls()">
                             <p ng-switch-when="0">Du har inga kast kvar. Välj vart du vill sätta ditt värde i tabellen ovan!</p>
