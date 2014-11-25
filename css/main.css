@@ -24,3 +24,43 @@
 
     margin-bottom: 15px;
 }
+
+.dice-list {
+    list-style: none;
+}
+
+.dice {
+    line-height: 4px;
+
+    border: solid 1px rgba(100, 100, 100, 0.75);
+    border-radius: 3px;
+    padding: 20px;
+
+    float: left;
+    margin: 5px;
+
+    position: relative;
+
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.dice.locked {
+    -webkit-box-shadow: inset 0px 0px 7px 0px rgba(0, 0, 0, 0.85);
+    -moz-box-shadow:    inset 0px 0px 7px 0px rgba(0, 0, 0, 0.85);
+    box-shadow:         inset 0px 0px 7px 0px rgba(0, 0, 0, 0.85);
+}
+
+.dice-toggle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    opacity: 0;
+}

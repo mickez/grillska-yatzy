@@ -5,8 +5,10 @@
     <div ng-if="yatzy.dices.remainingRolls() === 3">
         <h3>Kasta tärningarna!</h3>
     </div>
-    <ul ng-if="yatzy.dices.remainingRolls() !== 3">
-        <li ng-repeat="dice in yatzy.dices.dices">{{ dice.value }}<input type="checkbox" ng-model="dice.locked" ng-disabled="dice.value === -1"></li>
+    <ul ng-if="yatzy.dices.remainingRolls() !== 3" class="dice-list">
+        <li ng-repeat="dice in yatzy.dices.dices" class="dice" ng-class="{'locked': dice.locked}">
+            {{ dice.value }}
+            <input type="checkbox" ng-model="dice.locked" ng-disabled="dice.value === -1" class="dice-toggle"></li>
     </ul>
 
 
