@@ -6,9 +6,10 @@
         <h3>Kasta tärningarna!</h3>
     </div>
     <ul ng-if="yatzy.dices.remainingRolls() !== 3" class="dice-list">
-        <li ng-repeat="dice in yatzy.dices.dices" class="dice" ng-class="{'locked': dice.locked}">
-            {{ dice.value }}
-            <input type="checkbox" ng-model="dice.locked" ng-disabled="dice.value === -1" class="dice-toggle"></li>
+           <li ng-repeat="dice in yatzy.dices.dices" class="dice-container" ng-click="dice.locked = !dice.locked" ng-class={'rotate': animateRotate}>
+                <span ng-class="{'locked': dice.locked}"><dice value="dice.value"></dice></span>
+                <!-- <input type="checkbox" ng-model="dice.locked" ng-disabled="dice.value === -1" class="dice-toggle" ng-hide="true"> -->
+           </li>
     </ul>
 
 

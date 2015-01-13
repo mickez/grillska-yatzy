@@ -51,7 +51,8 @@
     };
 
     game.prototype.setDice = function(player, func, field) {
-        if (player !== this.turn || this.dices.rolls === 0 || this.players[player][field] || (this.state !== this.states['ROLL_PICK'] && this.state !== this.states['PICK'])) {
+        console.log('set');
+        if (player !== this.turn || this.dices.rolls === 0 || this.players[player][field] || this.players[player][field] === 0 || (this.state !== this.states['ROLL_PICK'] && this.state !== this.states['PICK'])) {
             return;
         }
 
@@ -59,6 +60,17 @@
         this.players[player][func](dices[0].value, dices[1].value, dices[2].value, dices[3].value, dices[4].value);
 
         this.state = this.states['NEXT_PLAYER'];
+
+    };
+
+    game.prototype.getDice = function(player, func, field) {
+        console.log('get');
+        if (player !== this.turn || this.dices.rolls === 0 || this.players[player][field] || (this.state !== this.states['ROLL_PICK'] && this.state !== this.states['PICK'])) {
+            return;
+        }
+
+        var dices = this.dices.dices;
+        return this.players[player][func](dices[0].value, dices[1].value, dices[2].value, dices[3].value, dices[4].value);
 
     };
 

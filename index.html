@@ -10,6 +10,7 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/ngFx/dist/ngFx.js"></script>
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
 
 <!-- NAMESPACES -->
 <script src="js/grillska-yatzy.js"></script>
@@ -23,6 +24,7 @@
 <script src="app/app.js"></script>
 
 <script src="app/newGame/newGame-directive.js"></script>
+<script src="app/dice/dice.js"></script>
 <script src="app/utils/SelectOnClick.js"></script>
 <script src="app/yatzy/yatzy-factory.js"></script>
 
@@ -46,7 +48,7 @@
                 <div class="uk-width-1-1 score-board">
                     <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">
                         <tr>
-                            <td>Spelare</td>
+                            <th>Spelare</th>
 
                             <th>Ettor</th>
                             <th>Tvåor</th>
@@ -68,80 +70,95 @@
                         <tr ng-repeat="player in yatzy.players">
                             <th>{{ player.name }}</th>
 
-                            <td ng-click="yatzy.setDice($index, 'setOnes', 'ones')">
+                            <td ng-click="yatzy.setDice($index, 'setOnes', 'ones')" ng-mouseenter="oneHint = true" ng-mouseleave="oneHint = false">
                                 <span ng-if="player.ones === 0 || player.ones">{{ player.ones }}</span>
-                                <span ng-if="!player.ones && player.ones !== 0">-</span>
+                                <!-- <span ng-if="!player.ones && player.ones !== 0 && !oneHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.one && player.one !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!oneHint}">{{ yatzy.getDice($index, 'getOnes', 'ones') }}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setTwos', 'twos')">                            
+                            <td ng-click="yatzy.setDice($index, 'setTwos', 'twos')" ng-mouseenter="twosHint = true" ng-mouseleave="twosHint = false">
                                 <span ng-if="player.twos === 0 || player.twos">{{ player.twos }}</span>
-                                <span ng-if="!player.twos && player.twos !== 0">-</span>
+                                <!-- <span ng-if="!player.twos && player.twos !== 0 && !twosHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.twos && player.twos !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!twosHint}">{{yatzy.getDice($index, 'getTwos', 'twos')}}</span>
                             </td>
 
-                            <td ng-click="yatzy.setDice($index, 'setThrees', 'threes')">                            
+                            <td ng-click="yatzy.setDice($index, 'setThrees', 'threes')" ng-mouseenter="threesHint = true" ng-mouseleave="threesHint = false">
                                 <span ng-if="player.threes === 0 || player.threes">{{ player.threes }}</span>
-                                <span ng-if="!player.threes && player.threes !== 0">-</span>
+                                <!-- <span ng-if="!player.threes && player.threes !== 0 && !threesHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.threes && player.threes !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!threesHint}">{{yatzy.getDice($index, 'getThrees', 'threes')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setFours', 'fours')">                            
+                            <td ng-click="yatzy.setDice($index, 'setFours', 'fours')" ng-mouseenter="foursHint = true" ng-mouseleave="foursHint = false">
                                 <span ng-if="player.fours === 0 || player.fours">{{ player.fours }}</span>
-                                <span ng-if="!player.fours && player.fours !== 0">-</span>
+                                <!-- <span ng-if="!player.fours && player.fours !== 0 && !foursHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.fours && player.fours !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!foursHint}">{{yatzy.getDice($index, 'getFours', 'fours')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setFives', 'fives')">                            
+                            <td ng-click="yatzy.setDice($index, 'setFives', 'fives')" ng-mouseenter="fivesHint = true" ng-mouseleave="fivesHint = false">
                                 <span ng-if="player.fives === 0 || player.fives">{{ player.fives }}</span>
-                                <span ng-if="!player.fives && player.fives !== 0">-</span>
+                                <!-- <span ng-if="!player.fives && player.fives !== 0 && !fivesHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.fives && player.fives !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!fivesHint}">{{yatzy.getDice($index, 'getFives', 'fives')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setSixes', 'sixes')">                            
+                            <td ng-click="yatzy.setDice($index, 'setSixes', 'sixes')" ng-mouseenter="sixesHint = true" ng-mouseleave="sixesHint = false">
                                 <span ng-if="player.sixes === 0 || player.sixes">{{ player.sixes }}</span>
-                                <span ng-if="!player.sixes && player.sixes !== 0">-</span>
+                                <!-- <span ng-if="!player.sixes && player.sixes !== 0 && !sixesHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.sixes && player.sixes !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!sixesHint}">{{yatzy.getDice($index, 'getSixes', 'sixes')}}</span>
                             </td>
 
 
-                            <td ng-click="yatzy.setDice($index, 'setPair', 'pair')">                            
+                            <td ng-click="yatzy.setDice($index, 'setPair', 'pair')" ng-mouseenter="pairHint = true" ng-mouseleave="pairHint = false">
                                 <span ng-if="player.pair === 0 || player.pair">{{ player.pair }}</span>
-                                <span ng-if="!player.pair && player.pair !== 0">-</span>
+                                <!-- <span ng-if="!player.pair && player.pair !== 0 && !pairHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.pair && player.pair !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted': !pairHint}">{{yatzy.getDice($index, 'getPair', 'pair')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setTwoPair', 'twoPair')">                            
+                            <td ng-click="yatzy.setDice($index, 'setTwoPair', 'twoPair')" ng-mouseenter="twoPairHint = true" ng-mouseleave="twoPairHint = false">
                                 <span ng-if="player.twoPair === 0 || player.twoPair">{{ player.twoPair }}</span>
-                                <span ng-if="!player.twoPair && player.twoPair !== 0">-</span>
+                                <!-- <span ng-if="!player.twoPair && player.twoPair !== 0 && !twoPairHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.twoPair && player.twoPair !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!twoPairHint}">{{yatzy.getDice($index, 'getTwoPair', 'twoPair')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setTriplet', 'triplet')">                            
+                            <td ng-click="yatzy.setDice($index, 'setTriplet', 'triplet')" ng-mouseenter="tripletHint = true" ng-mouseleave="tripletHint = false">
                                 <span ng-if="player.triplet === 0 || player.triplet">{{ player.triplet }}</span>
-                                <span ng-if="!player.triplet && player.triplet !== 0">-</span>
+                                <!-- <span ng-if="!player.triplet && player.triplet !== 0 && !tripletHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.triplet && player.triplet !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!tripletHint}">{{yatzy.getDice($index, 'getTriplet', 'triplet')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setQuadruplet', 'quadruplet')">                            
+                            <td ng-click="yatzy.setDice($index, 'setQuadruplet', 'quadruplet')" ng-mouseenter="quadrupletHint = true" ng-mouseleave="quadrupletHint = false">
                                 <span ng-if="player.quadruplet === 0 || player.quadruplet">{{ player.quadruplet }}</span>
-                                <span ng-if="!player.quadruplet && player.quadruplet !== 0">-</span>
+                                <!-- <span ng-if="!player.quadruplet && player.quadruplet !== 0 && !quadrupletHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.quadruplet && player.quadruplet !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!quadrupletHint}">{{yatzy.getDice($index, 'getQuadruplet', 'quadruplet')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setLadderSmall', 'ladderSmall')">                            
+                            <td ng-click="yatzy.setDice($index, 'setLadderSmall', 'ladderSmall')" ng-mouseenter="ladderSmallHint = true" ng-mouseleave="ladderSmallHint = false">
                                 <span ng-if="player.ladderSmall === 0 || player.ladderSmall">{{ player.ladderSmall }}</span>
-                                <span ng-if="!player.ladderSmall && player.ladderSmall !== 0">-</span>
+                                <!-- <span ng-if="!player.ladderSmall && player.ladderSmall !== 0 && !ladderSmallHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.ladderSmall && player.ladderSmall !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!ladderSmallHint}">{{yatzy.getDice($index, 'getLadderSmall', 'ladderSmall')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setLadderLarge', 'ladderLarge')">                            
+                            <td ng-click="yatzy.setDice($index, 'setLadderLarge', 'ladderLarge')" ng-mouseenter="ladderLargeHint = true" ng-mouseleave="ladderLargeHint = false">
                                 <span ng-if="player.ladderLarge === 0 || player.ladderLarge">{{ player.ladderLarge }}</span>
-                                <span ng-if="!player.ladderLarge && player.ladderLarge !== 0">-</span>
+                                <!-- <span ng-if="!player.ladderLarge && player.ladderLarge !== 0 && !ladderLargeHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.ladderLarge && player.ladderLarge !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!ladderLargeHint}">{{yatzy.getDice($index, 'getLadderLarge', 'ladderLarge')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setfullHouse', 'fullHouse')">                            
+                            <td ng-click="yatzy.setDice($index, 'setfullHouse', 'fullHouse')" ng-mouseenter="fullHouseHint = true" ng-mouseleave="fullHouseHint = false">
                                 <span ng-if="player.fullHouse === 0 || player.fullHouse">{{ player.fullHouse }}</span>
-                                <span ng-if="!player.fullHouse && player.fullHouse !== 0">-</span>
+                                <!-- <span ng-if="!player.fullHouse && player.fullHouse !== 0 && !fullHouseHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.fullHouse && player.fullHouse !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!fullHouseHint}">{{yatzy.getDice($index, 'getfullHouse', 'fullHouse')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setChance', 'chance')">                            
+                            <td ng-click="yatzy.setDice($index, 'setChance', 'chance')" ng-mouseenter="chanceHint = true" ng-mouseleave="chanceHint = false">
                                 <span ng-if="player.chance === 0 || player.chance">{{ player.chance }}</span>
-                                <span ng-if="!player.chance && player.chance !== 0">-</span>
+                                <!-- <span ng-if="!player.chance && player.chance !== 0 && !chanceHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.chance && player.chance !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!chanceHint}">{{yatzy.getDice($index, 'getChance', 'chance')}}</span>
                             </td>
                             
-                            <td ng-click="yatzy.setDice($index, 'setYatzy', 'yatzy')">                            
+                            <td ng-click="yatzy.setDice($index, 'setYatzy', 'yatzy')" ng-mouseenter="yatzyHint = true" ng-mouseleave="yatzyHint = false">
                                 <span ng-if="player.yatzy === 0 || player.yatzy">{{ player.yatzy }}</span>
-                                <span ng-if="!player.yatzy && player.yatzy !== 0">-</span>
+                                <!-- <span ng-if="!player.yatzy && player.yatzy !== 0 && !yatzyHint && yatzy.turn === $index">-</span> -->
+                                <span ng-if="(!player.yatzy && player.yatzy !== 0) && yatzy.turn === $index" ng-class="{'uk-text-muted':!yatzyHint}">{{yatzy.getDice($index, 'getYatzy', 'yatzy')}}</span>
                             </td>
                         </tr
                         >
@@ -149,14 +166,30 @@
                 </div>
 
                 <div class="container uk-grid uk-grid-preserve">
-                    <div ng-include="'partials/dice.html'" class="uk-width-1-2"></div>
+                    <div class="uk-width-1-2">
+                            <div style="min-height: 24px">
+                                
+                                <h3 ng-if="yatzy.dices.remainingRolls() !== 0 && yatzy.dices.remainingRolls() !== 3" class="fx-zoom-normal uk-text-center" >Marka de tärningarna du vill behålla</h3>
+                            </div>
+                            <div ng-if="yatzy.dices.remainingRolls() === 3">
+                                <h3>Kasta tärningarna!</h3>
+                            </div>
+                            <ul ng-if="yatzy.dices.remainingRolls() !== 3" class="dice-list">
+                                   <li ng-repeat="dice in yatzy.dices.dices" class="dice-container" ng-click="dice.locked = !dice.locked">
+                                        <span ng-class="{'locked': dice.locked && canRoll()}" style="position:relative">
+                                            <dice value="dice.value"></dice>
+                                            <span class="uk-icon-lock uk-icon-large lock" ng-if="dice.locked && canRoll()"></span>
+                                        </span>
+                                   </li>
+                            </ul>
+                    </div>
                     <div class="uk-width-1-2">
                         <h2>{{ getCurrentPlayer().name }}s tur</h2>
                         <h3>{{ getInstruction() }}</h3>
 
                         <div ng-if="isControlsVisible()">
                             <button 
-                                class="uk-button" 
+                                class="uk-button uk-button-primary" 
                                 ng-click="yatzy.roll()" 
                                 ng-disabled="!yatzy.dices.allowRoll()" 
                                 ng-show="yatzy.dices.allowRoll()">Kasta tärningarna!</button>
