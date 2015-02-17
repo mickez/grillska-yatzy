@@ -1,7 +1,7 @@
 angular.module('yatzy', ['ngAnimate', 'yatzy.newGame', 'ngFx', 'yatzy.utils', 'yatzy.dice'])
     .controller('main', function($scope, $timeout, yatzy) {
         $scope.meta = {};
-        $scope.meta.title = 'GRILLSKA YATZY';
+        $scope.meta.title = 'Yatzy!';
 
         $scope.yatzy = yatzy;
 

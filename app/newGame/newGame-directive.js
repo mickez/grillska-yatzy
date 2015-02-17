@@ -13,7 +13,7 @@
                 controller: function($scope, yatzyPlayer) {
                     var players = $scope.players = [];
                     var nPlayers = $scope.nPlayers = {
-                        value: NaN
+                        value: 1
                     };
                     var maxPlayers = $scope.maxPlayers = 10;
 

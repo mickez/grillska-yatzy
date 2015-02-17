@@ -32,7 +32,7 @@
     };
 
     player.prototype.getTotal = function(first_argument) {
-        var total = this.sum();
+        var total = this.getSum();
         total += this.pair || 0;
         total += this.twoPair || 0;
         total += this.triplet || 0;
