@@ -70,7 +70,7 @@
     display: flex;
     flex-direction: row
     flex-wrap: no-wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .dice-container {
@@ -118,6 +118,19 @@
     background-image: url('/images/footer_lodyas.png');
     background-color: #007700;
     background-repeat: both;
+}
+
+.flexy {
+    display: flex;
+    justify-content: space-around;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.no-padding {
+    padding: 0 !important;
 }
 
 .red-bg {

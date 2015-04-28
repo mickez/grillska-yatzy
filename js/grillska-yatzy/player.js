@@ -186,8 +186,6 @@
                 this.quadruplet = (i + 1) * 4;
             }
         }
-
-        this.quadruplet = 0;
     };
 
     player.prototype.setTriplet = function(d1, d2, d3, d4, d5) {
@@ -203,8 +201,6 @@
                 this.triplet = (i + 1) * 3;
             }
         }
-
-        this.triplet = 0;
     };
 
     player.prototype.setLadderSmall = function(d1, d2, d3, d4, d5) {

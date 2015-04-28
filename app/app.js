@@ -45,7 +45,7 @@ angular.module('yatzy', ['ngAnimate', 'yatzy.newGame', 'ngFx', 'yatzy.utils', 'y
                 case yatzy.states['ROLL_PICK']:
                     return 'Välj att kasta dina tärningar igen eller lås dina poäng i tabellen';
                 case yatzy.states['NEXT_PLAYER']:
-                    return 'Tryck på \'fortsätt\' för att låta nästa spelare köra';
+                    return 'Tryck på \'Nästa spelare\' för att låta nästa spelare köra';
             }
         };
 

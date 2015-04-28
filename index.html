@@ -176,54 +176,58 @@
                     </table>
                 </div>
 
-                <div class="container uk-grid uk-grid-preserve red-bg">
-                    <div class="uk-width-1-2" style="padding: 0">
-                            <div style="min-height: 24px">
-                                
-                                <h3 ng-if="yatzy.dices.remainingRolls() !== 0 && yatzy.dices.remainingRolls() !== 3" class="fx-zoom-normal uk-text-center">Marka de tärningarna du vill behålla</h3>
-                            </div>
-                            <div ng-if="yatzy.dices.remainingRolls() === 3" class="uk-text-center">
-                                <h3 >Kasta tärningarna!</h3>
-                            </div>
-                            <ul ng-if="yatzy.dices.remainingRolls() !== 3" class="dice-list">
-                                   <li ng-repeat="dice in yatzy.dices.dices" class="dice-container" ng-click="dice.locked = !dice.locked">
-                                        <span ng-class="{'locked': dice.locked && canRoll()}" style="position:relative">
-                                            <dice value="dice.value"></dice>
-                                            <span class="uk-icon-lock uk-icon-large lock" ng-if="dice.locked && canRoll()"></span>
-                                        </span>
-                                   </li>
-                            </ul>
-                    </div>
-                    <div class="uk-width-1-2 ">
-                        <h2>{{ getCurrentPlayer().name }}s tur</h2>
-                        <h3>{{ getInstruction() }}</h3>
-
-                        <div ng-if="isControlsVisible()">
-                            <button 
-                                class="uk-button uk-button-secondary" 
-                                ng-click="yatzy.roll()" 
-                                ng-disabled="!yatzy.dices.allowRoll()" 
-                                ng-show="yatzy.dices.allowRoll()"
-                                ng-class="{'uk-button-primary': yatzy.dices.remainingRolls() === 3}">Kasta tärningarna!</button>
+                    <div class="uk-width-1-1 flexy">
+                        <div class="uk-width-1-3 padding" style="padding: 0">
+                                <div class="red-bg">
+                                    <div>
+                                        <h2 ng-if="yatzy.dices.remainingRolls() !== 0 && yatzy.dices.remainingRolls() !== 3" class=" uk-text-center uk-margin-top">Markera de tärningarna du vill behålla</h2>
+                                        <h2 ng-if="yatzy.dices.remainingRolls() === 3" class="uk-text-center uk-margin-top ">Kasta tärningarna!</h2>
+                                        <h2 ng-if="yatzy.dices.remainingRolls() === 0" class="uk-text-center uk-margin-top ">Sätt in ditt värde i tabellen!</h2>
+                                    </div>
+                                </div>
+                                <ul ng-if="yatzy.dices.remainingRolls() !== 3 && yatzy.state !== yatzy.states['NEXT_PLAYER']" class="dice-list no-padding fx-zoom-normal">
+                                       <li ng-repeat="dice in yatzy.dices.dices" class="dice-container" ng-click="dice.locked = !dice.locked">
+                                            <span ng-class="{'locked': dice.locked && canRoll()}" style="position:relative">
+                                                <dice value="dice.value"></dice>
+                                                <span class="uk-icon-lock uk-icon-large lock" ng-if="dice.locked && canRoll()"></span>
+                                            </span>
+                                       </li>
+                                </ul>
                         </div>
+                        <div class="uk-width-1-3 padding" style="padding: 0">
+                            <div class="red-bg">
+                                <h2 class="uk-text-center uk-margin-top">{{ getCurrentPlayer().name }}s tur</h2>
+                            </div>
 
-                        <span ng-switch="yatzy.dices.remainingRolls()">
-                            <p ng-switch-when="0" ng-if="yatzy.state !== yatzy.states['NEXT_PLAYER']">Du har inga kast kvar. Välj vart du vill sätta ditt värde i tabellen ovan!</p>
-                            <p ng-switch-default>Du har {{ yatzy.dices.remainingRolls() }} kast kvar</p>
-                        </span>
-
-                        <span ng-if="yatzy.state === yatzy.states['NEXT_PLAYER']">
-                            <button ng-click="yatzy.nextPlayer()" class="uk-button uk-button-primary">Nästa spelare</button>
-                        </span>
-
-                        <br>
-
-                        <a href="http://www.spelregler.org/yatzy-regler/" target="_blank" class="uk-text-small">(Hjälp! Hur spelar jag yatzy!?)</a>
-
+                            <div class="red-bg padding uk-margin-top">
+                                <h3>{{ getInstruction() }}</h3>
+                                                        
+                                <div ng-if="isControlsVisible()">
+                                    <button 
+                                        class="uk-button uk-button-secondary" 
+                                        ng-click="yatzy.roll()" 
+                                        ng-disabled="!yatzy.dices.allowRoll()" 
+                                        ng-show="yatzy.dices.allowRoll()"
+                                        ng-class="{'uk-button-primary': true}">Kasta tärningarna!</button>
+                                </div>
+                                                        
+                                <span ng-switch="yatzy.dices.remainingRolls()">
+                                    <p ng-switch-when="0" ng-if="yatzy.state !== yatzy.states['NEXT_PLAYER']">Du har inga kast kvar. Välj vart du vill sätta ditt värde i tabellen ovan!</p>
+                                    <p ng-switch-default>Du har {{ yatzy.dices.remainingRolls() }} kast kvar</p>
+                                </span>
+                                                        
+                                <span ng-if="yatzy.state === yatzy.states['NEXT_PLAYER']">
+                                    <button ng-click="yatzy.nextPlayer()" class="uk-button uk-button-primary">Nästa spelare</button>
+                                </span>
+                            </div>
+                        
+                            <div class="red-bg padding uk-margin-top">
+                                <a href="http://www.spelregler.org/yatzy-regler/" target="_blank" class="uk-text-small">(Hjälp! Hur spelar jag yatzy!?)</a>
+                            </div>
+                        
+                        </div>
                     </div>
                 </div>
-
-            </div>
 
         </div>
 
